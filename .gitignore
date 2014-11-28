@@ -1,0 +1,27 @@
+# IDE specific
+.idea/
+ide_helper.php
+
+# Node.js files
+node_modules/
+
+# Laravel specific
+/app/storage/*
+/app/database/*.sqlite
+/bootstrap/compiled.php
+
+# Environment configurations
+.env*.php
+
+# Composer specific
+/vendor
+composer.phar
+
+# Mac specific
+.DS_Store
+Thumbs.db
+
+# Ctags
+.tags
+
+/bower_components
