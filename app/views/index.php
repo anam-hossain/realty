@@ -11,7 +11,6 @@
   <script src="app.js"></script>
 </head>
 <body>
-
   <div>Welcome to angularjs</div>
   <button>Yaahhooo!</button>
 </body>
