@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app>
 <head>
   <meta charset="utf-8">
   <title>Realty</title>
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <div ng-view></div>
-
+  <div>Welcome to angularjs</div>
+  <button>Yaahhooo!</button>
 </body>
 </html>
