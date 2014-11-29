@@ -16,7 +16,7 @@ class CreatePhotosTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('property_id');
-			$table->string('url');
+			$table->string('name');
 			$table->enum('location', array('local', 's3', 'dropbox'))->default('local');
 			
 			$table->timestamps();

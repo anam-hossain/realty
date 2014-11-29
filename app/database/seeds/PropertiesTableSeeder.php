@@ -41,7 +41,7 @@ class PropertiesTableSeeder extends Seeder {
 		{
 			Property::create([
 				'property_type' 	=> $this->randomPropertyType(), 
-		    	'amount'			=> $faker->randomNumber(4), 
+		    	'amount'			=> $faker->randomNumber(3), 
 		    	'address'			=> $faker->address, 
 		    	'description'		=> $this->randomDescription(), 
 		    	'beds'				=> array_rand($this->permit),

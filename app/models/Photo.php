@@ -6,7 +6,7 @@ class Photo extends Eloquent {
 
     protected $fillable = [
     	'property_id', 
-    	'url', 
+    	'name', 
     	'location'
     ];
 
