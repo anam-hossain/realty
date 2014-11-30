@@ -37,16 +37,16 @@ class PropertiesTableSeeder extends Seeder {
 	{
 		$faker = Faker::create('en_AU');
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 20) as $index)
 		{
 			Property::create([
 				'property_type' 	=> $this->randomPropertyType(), 
 		    	'amount'			=> $faker->randomNumber(3), 
 		    	'address'			=> $faker->address, 
 		    	'description'		=> $this->randomDescription(), 
-		    	'beds'				=> array_rand($this->permit),
-		    	'bathrooms'			=> $faker->randomNumber(1),
-		    	'car_spaces'		=> $faker->randomNumber(1),
+		    	'beds'				=> $faker->numberBetween(1, 6),
+		    	'bathrooms'			=> $faker->numberBetween(1, 3),
+		    	'car_spaces'		=> $faker->numberBetween(0, 4),
 		    	'smoking_allowed'	=> array_rand($this->permit),
 		    	'pets_allowed'		=> array_rand($this->permit),
 		    	'available_at'		=> $faker->dateTimeBetween($startDate = 'now', $endDate = '+30 days') 
