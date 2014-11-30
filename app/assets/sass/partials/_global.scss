@@ -1,0 +1,11 @@
+.photo-viewer {
+	.thumb {
+		img {
+			margin-bottom: 10px;
+			/* Responsive: Portrait tablets and up */
+			@media screen and (max-width: 600px) {
+			 	margin-bottom: 5px;
+			}
+		}
+	}
+}
