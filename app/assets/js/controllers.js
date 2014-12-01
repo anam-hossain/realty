@@ -18,19 +18,19 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property',
     }
     
     $scope.propertyImage = function(photo) {
-      console.log(this.imageDir + photo.name + this.ext);
       return this.imageDir + photo.name + this.ext;
     }        
   }]);
 
-realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Phone',
+realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Property',
   function($scope, $routeParams, Property) {
+    console.log($routeParams.propertyId);
     $scope.property = Property.get({propertyId: $routeParams.propertyId}, function(property) {
-      $scope.mainImageUrl = Property.images[0];
+      $scope.mainImageUrl = "images/" + property.photos[0].name + '.jpg';
     });
 
     $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
+      $scope.mainImageUrl = "images/" + imageUrl + '.jpg';
     }
   }
 ]);

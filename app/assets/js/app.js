@@ -21,7 +21,8 @@ realtyApp.config(['$routeProvider',
         controller: 'PropertyDetailCtrl'
       }).
       otherwise({
-        redirectTo: '/properties'
+        templateUrl: 'partials/property-list.html',
+        controller: 'PropertyListCtrl'
       });
   }
 ]);

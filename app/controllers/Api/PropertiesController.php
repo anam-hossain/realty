@@ -17,6 +17,14 @@ class PropertiesController extends \BaseController {
 		return Response::json($properties);
 	}
 
+
+	public function show($id)
+	{
+		$property = Property::with('photos')->find($id);
+
+		return Response::json($property);
+	}
+
 	/**
 	 * Store a newly created resource in storage.
 	 *

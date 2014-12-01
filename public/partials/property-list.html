@@ -1,0 +1,35 @@
+<div class="well" ng-repeat="property in properties">
+  <div class="row">
+    <div class="col-sm-4">
+        <a href="#/properties/{{property.id}}">
+          <img class="img-responsive img-thumbnail" ng-repeat="photo in property.photos | limitTo: 1" ng-src="{{ propertyImage(photo) }}">
+        </a>
+    </div>
+    <div class="col-sm-8">
+      <div class="listing-info">
+        <div class="list-address">
+          <div class="row">
+            <div class="col-sm-9">
+              <p><a href="#/properties/{{property.id}}"><strong>{{ property.address }}</strong></a></p>
+            </div>
+            <div class="col-sm-3">
+              <p class="text-right rent">${{ property.amount }} per week</p>
+            </div>
+          </div>
+        </div>
+        <ul class="list-inline property-type">
+          <li><span>{{ property.property_type | ucfirst }}</span></li>
+          <li><img src="icon/bed.png" width="22"> {{ property.beds }}</li>
+          <li><img src="icon/bath.png" width="22"> {{ property.bathrooms }}</li>
+          <li ng-show="isCarSpaceAvailable(property.car_spaces)"><img src="icon/car.png" width="22"> {{ property.car_spaces }}</li>
+        </ul>
+        <p>
+          {{ property.description | strLimit : 250 }}
+        </p>
+        <p class="text-right">
+          <a href="#/properties/{{property.id}}" class="btn btn-primary">Details</a>
+        </p> 
+      </div>
+    </div>
+  </div>
+</div>
