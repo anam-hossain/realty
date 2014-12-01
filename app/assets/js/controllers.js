@@ -8,6 +8,13 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property',
   function($scope, Property) {
     $scope.properties = Property.query();
     $scope.orderProp = 'id';
+
+    $scope.isCarSpaceAvailable = function(carSpace) {
+      if (carSpace != 0) {
+        return true;
+      }
+      return false;
+    }    
   }]);
 
 realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Phone',

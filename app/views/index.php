@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="realtyApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app.css">
 </head>
-<body>
+<body ng-controller="PropertyListCtrl">
   <div class="container">
     <div class="header">
       <nav>
@@ -22,10 +22,10 @@
           <li role="presentation"><a href="#">Contact</a></li>
         </ul>
       </nav>
-      <h3 class="text-muted">Realty</h3>
+      <h3 class="text-muted">Realty ({{ properties.length }})</h3>
     </div>
 
-    <div class="well">
+    <div class="well" ng-repeat="property in properties | orderBy:orderProp">
       <div class="row">
         <div class="col-sm-4">
           <img class="img-responsive img-thumbnail" src="images/10.jpg">
@@ -35,59 +35,21 @@
             <div class="list-address">
               <div class="row">
                 <div class="col-sm-9">
-                  <p><strong>211/16 Lusty Street, Wolli Creek, NSW 2205</strong></p>
+                  <p><strong>{{ property.address }}</strong></p>
                 </div>
                 <div class="col-sm-3">
-                  <p class="text-right rent">$560 per week</p>
+                  <p class="text-right rent">${{ property.amount }} per week</p>
                 </div>
               </div>
             </div>
             <ul class="list-inline property-type">
-              <li><span>Appartment</span></li>
-              <li><img src="icon/bed.png" width="22"> 3</li>
-              <li><img src="icon/bath.png" width="22"> 1</li>
-              <li><img src="icon/car.png" width="22"> 2</li>
+              <li><span>{{ property.property_type | ucfirst }}</span></li>
+              <li><img src="icon/bed.png" width="22"> {{ property.beds }}</li>
+              <li><img src="icon/bath.png" width="22"> {{ property.bathrooms }}</li>
+              <li ng-show="isCarSpaceAvailable(property.car_spaces)"><img src="icon/car.png" width="22"> {{ property.car_spaces }}</li>
             </ul>
             <p>
-              Please call Will 0404 665 999 for inspection appointment~ The stylish new apartments are designed for modern living and comfort...
-              <br>
-              Please call Will 0404 665 999 for inspection appointment.
-            </p>
-            <p class="text-right">
-              <button class="btn btn-primary">Details</button>
-            </p> 
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="well">
-      <div class="row">
-        <div class="col-sm-4">
-          <img class="img-responsive img-thumbnail" src="images/1.jpg">
-        </div>
-        <div class="col-sm-8">
-          <div class="listing-info">
-            <div class="list-address">
-              <div class="row">
-                <div class="col-sm-9">
-                  <p><strong>211/16 Prices Highway, Wolli Creek, NSW 2205</strong></p>
-                </div>
-                <div class="col-sm-3">
-                  <p class="text-right rent">$560 per week</p>
-                </div>
-              </div>
-            </div>
-            <ul class="list-inline property-type">
-              <li><span>House</span></li>
-              <li><img src="icon/bed.png" width="22"> 3</li>
-              <li><img src="icon/bath.png" width="22"> 1</li>
-              <li><img src="icon/car.png" width="22"> 2</li>
-            </ul>
-            <p>
-              Please call Will 0404 665 999 for inspection appointment~ The stylish new apartments are designed for modern living and comfort...
-              <br>
-              Please call Will 0404 665 999 for inspection appointment.
+              {{ property.description | strLimit : 250 }}
             </p>
             <p class="text-right">
               <button class="btn btn-primary">Details</button>
