@@ -12,7 +12,9 @@ class PropertiesController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Response::json(Property::get());
+		$properties = Property::with('photos')->orderBy('id', 'desc')->get();
+
+		return Response::json($properties);
 	}
 
 	/**

@@ -25,10 +25,10 @@
       <h3 class="text-muted">Realty ({{ properties.length }})</h3>
     </div>
 
-    <div class="well" ng-repeat="property in properties | orderBy:orderProp">
+    <div class="well" ng-repeat="property in properties">
       <div class="row">
         <div class="col-sm-4">
-          <img class="img-responsive img-thumbnail" src="images/10.jpg">
+            <img class="img-responsive img-thumbnail" ng-repeat="photo in property.photos | limitTo: 1" ng-src="{{ propertyImage(photo) }}">
         </div>
         <div class="col-sm-8">
           <div class="listing-info">
