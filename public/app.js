@@ -17,15 +17,15 @@ realtyApp.config(['$routeProvider',
         controller: 'PropertyListCtrl',
         activetab: 'home'
       }).
+      when('/properties/advertise', {
+        templateUrl: 'partials/properties/create.html',
+        controller: 'PropertyAdvertisementCtrl',
+        activetab: 'advertise'
+      }).
       when('/properties/:propertyId', {
         templateUrl: 'partials/properties/detail.html',
         controller: 'PropertyDetailCtrl',
         activetab: ''
-      }).
-      when('/properties/advertise', {
-        templateUrl: 'partials/properties/advertise.html',
-        controller: 'PropertyAdvertisementCtrl',
-        activetab: 'advertise'
       }).
       otherwise({
         templateUrl: 'partials/properties/list.html',
@@ -56,10 +56,13 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propert
     }        
   }]);
 
-realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Property', 'propertyImage',
-  function($scope, $routeParams, Property, propertyImage) {
+realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Page', 'Property', 'propertyImage',
+  function($scope, $routeParams, Page, Property, propertyImage) {
     $scope.property = Property.get({propertyId: $routeParams.propertyId}, function(property) {
       $scope.mainImageUrl = propertyImage.jpg(property.photos[0].name);
+      
+      // set page title
+      Page.setTitle(property.address);
     });
 
     $scope.setImage = function(image) {
@@ -69,11 +72,55 @@ realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'P
 ]);
 
 
-realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Property', 'propertyImage',
-  function($scope, Property, propertyImage) {
-    console.log("Property Advertisement Controller"); 
+realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Page',
+  function($scope, Page) {
+    Page.setTitle("List your property");
+    
+    $scope.propertyTypes = [
+      { value: 'unit', name: 'Unit' },
+      { value: 'house', name: 'House' },
+      { value: 'apartment', name: 'Apartment' },
+    ];
+
+    $scope.beds = [
+      { value: 1, number: 1 },
+      { value: 2, number: 2 },
+      { value: 3, number: 3 },
+      { value: 4, number: 4 },
+      { value: 5, number: 5 },
+      { value: 6, number: 6 },
+      { value: 7, number: 7 },
+      { value: 8, number: 8 },
+      { value: 9, number: 9 },
+      { value: 10, number: 10 }
+    ];
+
+    $scope.bathrooms = [
+      { value: 1, number: 1 },
+      { value: 2, number: 2 },
+      { value: 3, number: 3 },
+      { value: 4, number: 4 },
+      { value: 5, number: 5 }
+    ];
+
+    $scope.garageSpaces = [
+      { value: 1, number: 1 },
+      { value: 2, number: 2 },
+      { value: 3, number: 3 },
+      { value: 4, number: 4 },
+      { value: 5, number: 5 }
+    ];
+
+    // Pre-selected items
+    $scope.selectedBed = $scope.beds[0].number;
+    $scope.selectedBathroom = $scope.bathrooms[0].number;
+    $scope.selectedGarageSpace = $scope.garageSpaces[0].number;
 }]);
 
+realtyControllers.controller('LayoutsCtrl', ['$scope', 'Page',
+  function($scope, Page) {
+    $scope.Page = Page;
+}]);
 
 realtyControllers.controller('WidgetsCtrl', ['$scope', '$route',
   function($scope, $route) {
@@ -88,6 +135,7 @@ var realtyFilters = angular.module('realtyFilters', []);
 
 realtyFilters.filter('ucfirst', function() {
   return function(input) {
+    if (! input) return;
     return input.charAt(0).toUpperCase() + input.slice(1);
   };
 });
@@ -121,6 +169,16 @@ realtyServices.factory('Property', ['$resource',
     return $resource('/api/properties/:propertyId');
   }
 ]);
+
+realtyServices.factory('Page', function() {
+ var title = 'Realty';
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { 
+      title = newTitle + " - Realty";
+    }
+  };
+});
 
 realtyServices.service('propertyImage', function() {
 	var dir = "images/";

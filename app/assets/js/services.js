@@ -10,6 +10,16 @@ realtyServices.factory('Property', ['$resource',
   }
 ]);
 
+realtyServices.factory('Page', function() {
+ var title = 'Realty';
+  return {
+    title: function() { return title; },
+    setTitle: function(newTitle) { 
+      title = newTitle + " - Realty";
+    }
+  };
+});
+
 realtyServices.service('propertyImage', function() {
 	var dir = "images/";
 

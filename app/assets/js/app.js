@@ -17,15 +17,15 @@ realtyApp.config(['$routeProvider',
         controller: 'PropertyListCtrl',
         activetab: 'home'
       }).
+      when('/properties/advertise', {
+        templateUrl: 'partials/properties/create.html',
+        controller: 'PropertyAdvertisementCtrl',
+        activetab: 'advertise'
+      }).
       when('/properties/:propertyId', {
         templateUrl: 'partials/properties/detail.html',
         controller: 'PropertyDetailCtrl',
         activetab: ''
-      }).
-      when('/properties/advertise', {
-        templateUrl: 'partials/properties/advertise.html',
-        controller: 'PropertyAdvertisementCtrl',
-        activetab: 'advertise'
       }).
       otherwise({
         templateUrl: 'partials/properties/list.html',

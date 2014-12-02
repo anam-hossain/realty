@@ -1,0 +1,76 @@
+<h2>List your property</h2>
+<div class="well">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">Property Type</label>
+      <div class="col-sm-6">
+        <select ng-model="selectedPropertyType" class="form-control" ng-options="propertyType.value as propertyType.name for propertyType in propertyTypes">
+          <option value selected>Select..</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address" class="col-sm-3 control-label">Address</label>
+      <div class="col-sm-8">
+        <input ng-model="address" type="text" class="form-control" name="address" placeholder="Address">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address" class="col-sm-3 control-label">Rent</label>
+      <div class="col-sm-4">
+        <input ng-model="amount" type="number" class="form-control" name="amount" placeholder="Rent per week">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="col-sm-3 control-label">Description</label>
+      <div class="col-sm-8">
+        <textarea ng-model="description" class="form-control" rows="5" name="description" placeholder="Property description">
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address" class="col-sm-3 control-label">Date available</label>
+      <div class="col-sm-5">
+        <input ng-model="dateAvailable" type="date" class="form-control" name="date_available">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">Beds</label>
+      <div class="col-sm-3">
+        <select class="form-control" ng-model="selectedBed" ng-options="bed.value as bed.number for bed in beds"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">Bathrooms</label>
+      <div class="col-sm-3">
+        <select class="form-control" ng-model="selectedBathroom" ng-options="bathroom.value as bathroom.number for bathroom in bathrooms"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-3 control-label">Garage Spaces</label>
+      <div class="col-sm-3">
+        <select class="form-control" ng-model="selectedGarageSpace" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces"></select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input ng-model="smoking" type="checkbox"> Smoking allowed
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input ng-model="pets" type="checkbox"> Pets allowed
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-6">
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">List property</button>
+      </div>
+    </div>
+  </form>
+</div>
