@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-sm-10">
+    <h3>{{ property.address }}</h3>
+  </div>
+  <div class="col-sm-2">
+    <p class="text-muted text-right">Property No. {{ property.id }}</p>
+  </div>
+</div>
+<hr>
+
+<div class="property-details">
+  <p class="text-danger h5"><strong>${{ property.amount }} per week</strong></p>
+  <ul class="list-inline property-type">
+    <li><span>{{ property.property_type | ucfirst }}</span></li>
+    <li><img src="icon/bed.png" width="22"> {{ property.beds }}</li>
+    <li><img src="icon/bath.png" width="22"> {{ property.bathrooms }}</li>
+    <li ng-show="isCarSpaceAvailable(property.car_spaces)"><img src="icon/car.png" width="22"> {{ property.car_spaces }}</li>
+  </ul>
+</div>
+
+<p>
+  <strong>Date Available:</strong> {{ property.available_at }}
+</p>
+<br>
+<div class="well photo-viewer">
+  <div class="row">
+    <div class="col-sm-10 col-xs-9">
+      <div class="main-photo">
+        <img class="img-responsive img-rounded" ng-src="{{ mainImageUrl }}">
+      </div>
+    </div>
+    <div class="col-sm-2 col-xs-3">
+      <div class="thumb">
+        <a href ng-repeat="photo in property.photos | limitTo: 5" ng-click="setImage(photo.name)">
+          <img class="img-responsive img-thumbnail"  ng-src="images/{{ photo.name }}.jpg">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="property-description">
+    <h1>{{ property.address }}</h1>
+    <p ng-bind-html="property.description | nl2br"></p>
+</div>

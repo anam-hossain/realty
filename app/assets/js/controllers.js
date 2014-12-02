@@ -4,11 +4,9 @@
 
 var realtyControllers = angular.module('realtyControllers', []);
 
-realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property',
-  function($scope, Property) {
+realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propertyImage',
+  function($scope, Property, propertyImage) {
     $scope.properties = Property.query();
-    $scope.imageDir = "images/";
-    $scope.ext = '.jpg';
 
     $scope.isCarSpaceAvailable = function(carSpace) {
       if (carSpace != 0) {
@@ -17,20 +15,25 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property',
       return false;
     }
     
-    $scope.propertyImage = function(photo) {
-      return this.imageDir + photo.name + this.ext;
+    $scope.getPropertyImage = function(photo) {
+      return propertyImage.jpg(photo.name);
     }        
   }]);
 
-realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Property',
-  function($scope, $routeParams, Property) {
-    console.log($routeParams.propertyId);
+realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Property', 'propertyImage',
+  function($scope, $routeParams, Property, propertyImage) {
     $scope.property = Property.get({propertyId: $routeParams.propertyId}, function(property) {
-      $scope.mainImageUrl = "images/" + property.photos[0].name + '.jpg';
+      $scope.mainImageUrl = propertyImage.jpg(property.photos[0].name);
     });
 
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = "images/" + imageUrl + '.jpg';
+    $scope.setImage = function(image) {
+      $scope.mainImageUrl = propertyImage.jpg(image);
     }
   }
 ]);
+
+
+realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Property', 'propertyImage',
+  function($scope, Property, propertyImage) {
+    console.log("Property Advertisement Controller"); 
+  }]);

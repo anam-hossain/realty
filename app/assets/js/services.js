@@ -9,3 +9,16 @@ realtyServices.factory('Property', ['$resource',
     return $resource('/api/properties/:propertyId');
   }
 ]);
+
+realtyServices.service('propertyImage', function() {
+	var dir = "images/";
+
+  return {
+    jpg : function(name) {
+      return dir + name + ".jpg";
+    },
+    png : function(name) {
+      return dir + name + ".png";
+    }
+  };
+});
