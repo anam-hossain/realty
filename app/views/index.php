@@ -12,14 +12,13 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app.css">
 </head>
-<body ng-controller="PropertyListCtrl">
+<body>
   <div class="container">
     <div class="header">
-      <nav>
+      <nav ng-controller="WidgetsCtrl">
         <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">About</a></li>
-          <li role="presentation"><a href="#">Contact</a></li>
+          <li role="presentation" ng-class="{active: $route.current.activetab == 'home'}"><a href="/">Home</a></li>
+          <li role="presentation" ng-class="{active: $route.current.activetab == 'advertise'}"><a href="#">Place an Ad</a></li>
         </ul>
       </nav>
       <h3 class="text-muted"><a href="/">Realty</a></h3>

@@ -14,19 +14,23 @@ realtyApp.config(['$routeProvider',
     $routeProvider.
       when('/properties', {
         templateUrl: 'partials/properties/list.html',
-        controller: 'PropertyListCtrl'
+        controller: 'PropertyListCtrl',
+        activetab: 'home'
       }).
       when('/properties/:propertyId', {
         templateUrl: 'partials/properties/detail.html',
-        controller: 'PropertyDetailCtrl'
+        controller: 'PropertyDetailCtrl',
+        activetab: ''
       }).
       when('/properties/advertise', {
         templateUrl: 'partials/properties/advertise.html',
-        controller: 'PropertyAdvertisementCtrl'
+        controller: 'PropertyAdvertisementCtrl',
+        activetab: 'advertise'
       }).
       otherwise({
         templateUrl: 'partials/properties/list.html',
-        controller: 'PropertyListCtrl'
+        controller: 'PropertyListCtrl',
+        activetab: 'home'
       });
   }
 ]);
@@ -68,7 +72,13 @@ realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'P
 realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Property', 'propertyImage',
   function($scope, Property, propertyImage) {
     console.log("Property Advertisement Controller"); 
-  }]);
+}]);
+
+
+realtyControllers.controller('WidgetsCtrl', ['$scope', '$route',
+  function($scope, $route) {
+    $scope.$route = $route;
+}]);
 
 'use strict';
 

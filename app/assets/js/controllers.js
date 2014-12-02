@@ -36,4 +36,10 @@ realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'P
 realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Property', 'propertyImage',
   function($scope, Property, propertyImage) {
     console.log("Property Advertisement Controller"); 
-  }]);
+}]);
+
+
+realtyControllers.controller('WidgetsCtrl', ['$scope', '$route',
+  function($scope, $route) {
+    $scope.$route = $route;
+}]);
