@@ -18,7 +18,7 @@ realtyApp.config(['$routeProvider',
         activetab: 'home'
       }).
       when('/properties/advertise', {
-        templateUrl: 'partials/properties/create.html',
+        templateUrl: 'partials/properties/form.html',
         controller: 'PropertyAdvertisementCtrl',
         activetab: 'advertise'
       }).
@@ -26,6 +26,11 @@ realtyApp.config(['$routeProvider',
         templateUrl: 'partials/properties/detail.html',
         controller: 'PropertyDetailCtrl',
         activetab: ''
+      }).
+      when('/properties/:propertyId/edit', {
+        templateUrl: 'partials/properties/form.html',
+        controller: 'PropertyEditCtrl',
+        activetab: 'edit'
       }).
       otherwise({
         templateUrl: 'partials/properties/list.html',
@@ -72,51 +77,27 @@ realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'P
 ]);
 
 
-realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', '$location', 'Page', 'Property',
-  function($scope, $location, Page, Property) {
+realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', '$location', 'Page', 'Property', 'propertyData',
+  function($scope, $location, Page, Property, propertyData) {
     Page.setTitle("List your property");
     
-    $scope.propertyTypes = [
-      { value: 'unit', name: 'Unit' },
-      { value: 'house', name: 'House' },
-      { value: 'apartment', name: 'Apartment' },
-    ];
+    $scope.title = "List your property";
+    $scope.submitButtonTitle = "List property";
 
-    $scope.beds = [
-      { value: 1, number: 1 },
-      { value: 2, number: 2 },
-      { value: 3, number: 3 },
-      { value: 4, number: 4 },
-      { value: 5, number: 5 },
-      { value: 6, number: 6 },
-      { value: 7, number: 7 },
-      { value: 8, number: 8 },
-      { value: 9, number: 9 },
-      { value: 10, number: 10 }
-    ];
+    $scope.propertyTypes = propertyData.propertyTypes();
 
-    $scope.bathrooms = [
-      { value: 1, number: 1 },
-      { value: 2, number: 2 },
-      { value: 3, number: 3 },
-      { value: 4, number: 4 },
-      { value: 5, number: 5 }
-    ];
+    $scope.beds = propertyData.beds();
 
-    $scope.garageSpaces = [
-      { value: 1, number: 1 },
-      { value: 2, number: 2 },
-      { value: 3, number: 3 },
-      { value: 4, number: 4 },
-      { value: 5, number: 5 }
-    ];
+    $scope.bathrooms = propertyData.bathrooms();
+
+    $scope.garageSpaces = propertyData.garageSpaces();
 
     $scope.property = new Property();
     // Pre-selected items
     $scope.property.beds = $scope.beds[0].number;
     $scope.property.bathrooms = $scope.bathrooms[0].number;
 
-    $scope.addProperty = function() {
+    $scope.processForm = function() {
       $scope.property.$save(function(result) {
         if (result.success) {
           // redirect to home page
@@ -124,6 +105,43 @@ realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', '$location'
         }
       });
     }    
+}]);
+
+
+realtyControllers.controller('PropertyEditCtrl', ['$scope', '$routeParams', '$location', 'Page', 'Property', 'propertyData',
+  function($scope, $routeParams, $location, Page, Property, propertyData) {
+    Page.setTitle("Edit your property");
+    
+    $scope.title = "Edit your property";
+    $scope.submitButtonTitle = "Update property";
+
+    $scope.propertyTypes = propertyData.propertyTypes();
+
+    $scope.beds = propertyData.beds();
+
+    $scope.bathrooms = propertyData.bathrooms();
+
+    $scope.garageSpaces = propertyData.garageSpaces();
+
+    $scope.property = Property.get({propertyId: $routeParams.propertyId}, function (property) {
+      if (property.smoking_allowed == 1) {
+        $scope.property.smoking_allowed = true;
+      }
+
+      if (property.pets_allowed == 1) {
+        $scope.property.pets_allowed = true;
+      }
+      
+    });
+    
+    $scope.processForm = function() {
+      $scope.property.$save(function(result) {
+        if (result.success) {
+          // redirect to home page
+          $location.path('/');
+        }
+      });
+    }       
 }]);
 
 realtyControllers.controller('LayoutsCtrl', ['$scope', 'Page',
@@ -185,6 +203,51 @@ realtyServices.factory('Page', function() {
     title: function() { return title; },
     setTitle: function(newTitle) { 
       title = newTitle + " - Realty";
+    }
+  };
+});
+
+
+realtyServices.service('propertyData', function() {
+  return {
+    propertyTypes: function() {
+      return [
+        { value: 'unit', name: 'Unit' },
+        { value: 'house', name: 'House' },
+        { value: 'apartment', name: 'Apartment' },
+      ];
+    },
+    beds: function() { 
+      return [
+        { value: "1", number: "1" },
+        { value: "2", number: "2" },
+        { value: "3", number: "3" },
+        { value: "4", number: "4" },
+        { value: "5", number: "5" },
+        { value: "6", number: "6" },
+        { value: "7", number: "7" },
+        { value: "8", number: "8" },
+        { value: "9", number: "9" },
+        { value: "10", number: "10" }
+      ];
+    },
+    bathrooms: function() {
+      return [
+        { value: "1", number: "1" },
+        { value: "2", number: "2" },
+        { value: "3", number: "3" },
+        { value: "4", number: "4" },
+        { value: "5", number: "5" }
+      ];
+    },
+    garageSpaces: function() {
+      return [
+        { value: "1", number: "1" },
+        { value: "2", number: "2" },
+        { value: "3", number: "3" },
+        { value: "4", number: "4" },
+        { value: "5", number: "5" }
+      ];
     }
   };
 });

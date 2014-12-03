@@ -18,7 +18,7 @@ realtyApp.config(['$routeProvider',
         activetab: 'home'
       }).
       when('/properties/advertise', {
-        templateUrl: 'partials/properties/create.html',
+        templateUrl: 'partials/properties/form.html',
         controller: 'PropertyAdvertisementCtrl',
         activetab: 'advertise'
       }).
@@ -26,6 +26,11 @@ realtyApp.config(['$routeProvider',
         templateUrl: 'partials/properties/detail.html',
         controller: 'PropertyDetailCtrl',
         activetab: ''
+      }).
+      when('/properties/:propertyId/edit', {
+        templateUrl: 'partials/properties/form.html',
+        controller: 'PropertyEditCtrl',
+        activetab: 'edit'
       }).
       otherwise({
         templateUrl: 'partials/properties/list.html',
