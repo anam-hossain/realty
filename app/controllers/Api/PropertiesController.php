@@ -37,16 +37,20 @@ class PropertiesController extends \BaseController {
 		// Remove empty and boolean false inputs;
 		
 		$input = array_filter(Input::all());
-		return $input;
-		if (isset($input['pets'])) $input['pets'] = 1;
+		//return $input;
+		if (isset($input['pets_allowed'])) $input['pets_allowed'] = 1;
 
-		if (isset($input['smoking'])) $input['smoking'] = 1;
+		if (isset($input['smoking_allowed'])) $input['smoking_allowed'] = 1;
 		
-		if (isset($input['dateAvailable'])) {
-			$input['dateAvailable'] = Carbon::parse($input['dateAvailable']);
+		if (isset($input['available_at'])) {
+			$input['available_at'] = Carbon::parse($input['available_at']);
 		}
 
-		Property::create($input);
+		$property = Property::create($input);
+
+		for ($i=0; $i< rand ( 1 , 5 ); $i++) {
+			\Photo::create(['property_id' => $property->id, 'name' => rand (1, 15)]);
+		}
 
 		return Response::json(array('success' => true));
 	}

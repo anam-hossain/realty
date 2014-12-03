@@ -4,7 +4,7 @@
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Property Type</label>
       <div class="col-sm-6">
-        <select name="propertyType" required ng-model="property.propertyType" class="form-control" ng-options="propertyType.value as propertyType.name for propertyType in propertyTypes">
+        <select name="propertyType" required ng-model="property.property_type" class="form-control" ng-options="propertyType.value as propertyType.name for propertyType in propertyTypes">
           <option value selected>Select..</option>
         </select>
         <p class="help-block" ng-if="addPropertyForm.propertyType.$error.required && addPropertyForm.$submitted">
@@ -43,25 +43,25 @@
     <div class="form-group">
       <label for="address" class="col-sm-3 control-label">Date available</label>
       <div class="col-sm-5">
-        <input ng-model="property.dateAvailable" type="date" class="form-control" name="date_available" required>
+        <input ng-model="property.available_at" type="date" class="form-control" name="date_available" required>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Beds</label>
       <div class="col-sm-3">
-        <select class="form-control" ng-model="property.bed" ng-options="bed.value as bed.number for bed in beds" required></select>
+        <select class="form-control" ng-model="property.beds" ng-options="bed.value as bed.number for bed in beds" required></select>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Bathrooms</label>
       <div class="col-sm-3">
-        <select class="form-control" ng-model="property.bathroom" ng-options="bathroom.value as bathroom.number for bathroom in bathrooms" required></select>
+        <select class="form-control" ng-model="property.bathrooms" ng-options="bathroom.value as bathroom.number for bathroom in bathrooms" required></select>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Garage Spaces</label>
       <div class="col-sm-3">
-        <select class="form-control" ng-model="property.garageSpace" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces">
+        <select class="form-control" ng-model="property.car_spaces" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces">
           <option value selected>Select..</option>
         </select>
       </div>
@@ -70,12 +70,12 @@
       <div class="col-sm-offset-3 col-sm-10">
         <div class="checkbox">
           <label>
-            <input ng-model="property.smoking" type="checkbox"> Smoking allowed
+            <input ng-model="property.smoking_allowed" type="checkbox"> Smoking allowed
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input ng-model="property.pets" type="checkbox"> Pets allowed
+            <input ng-model="property.pets_allowed" type="checkbox"> Pets allowed
           </label>
         </div>
       </div>
