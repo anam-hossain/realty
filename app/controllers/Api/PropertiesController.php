@@ -2,6 +2,8 @@
 
 use Property;
 use Response;
+use Input;
+use Carbon\Carbon;
 
 class PropertiesController extends \BaseController {
 
@@ -32,10 +34,19 @@ class PropertiesController extends \BaseController {
 	 */
 	public function store()
 	{
-		Property::create(array(
-			'author' => Input::get('author'),
-			'text' => Input::get('text')
-		));
+		// Remove empty and boolean false inputs;
+		
+		$input = array_filter(Input::all());
+		return $input;
+		if (isset($input['pets'])) $input['pets'] = 1;
+
+		if (isset($input['smoking'])) $input['smoking'] = 1;
+		
+		if (isset($input['dateAvailable'])) {
+			$input['dateAvailable'] = Carbon::parse($input['dateAvailable']);
+		}
+
+		Property::create($input);
 
 		return Response::json(array('success' => true));
 	}

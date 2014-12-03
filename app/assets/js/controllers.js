@@ -36,8 +36,8 @@ realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'P
 ]);
 
 
-realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Page',
-  function($scope, Page) {
+realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Page', 'Property',
+  function($scope, Page, Property) {
     Page.setTitle("List your property");
     
     $scope.propertyTypes = [
@@ -75,10 +75,16 @@ realtyControllers.controller('PropertyAdvertisementCtrl', ['$scope', 'Page',
       { value: 5, number: 5 }
     ];
 
+    $scope.property = new Property();
     // Pre-selected items
-    $scope.selectedBed = $scope.beds[0].number;
-    $scope.selectedBathroom = $scope.bathrooms[0].number;
-    $scope.selectedGarageSpace = $scope.garageSpaces[0].number;
+    $scope.property.bed = $scope.beds[0].number;
+    $scope.property.bathroom = $scope.bathrooms[0].number;
+
+    $scope.addProperty = function() {
+      $scope.property.$save(function(result) {
+        console.log(result);
+      });
+    }    
 }]);
 
 realtyControllers.controller('LayoutsCtrl', ['$scope', 'Page',

@@ -1,10 +1,10 @@
 <h2>List your property</h2>
 <div class="well">
-  <form class="form-horizontal" role="form">
+  <form name="addPropertyForm" class="form-horizontal" role="form" ng-submit="addPropertyForm.$valid && addProperty()" novalidate>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Property Type</label>
       <div class="col-sm-6">
-        <select ng-model="selectedPropertyType" class="form-control" ng-options="propertyType.value as propertyType.name for propertyType in propertyTypes">
+        <select required ng-model="property.propertyType" class="form-control" ng-options="propertyType.value as propertyType.name for propertyType in propertyTypes">
           <option value selected>Select..</option>
         </select>
       </div>
@@ -12,56 +12,58 @@
     <div class="form-group">
       <label for="address" class="col-sm-3 control-label">Address</label>
       <div class="col-sm-8">
-        <input ng-model="address" type="text" class="form-control" name="address" placeholder="Address">
+        <input ng-model="property.address" type="text" class="form-control" name="address" placeholder="Address" required>
       </div>
     </div>
     <div class="form-group">
       <label for="address" class="col-sm-3 control-label">Rent</label>
       <div class="col-sm-4">
-        <input ng-model="amount" type="number" class="form-control" name="amount" placeholder="Rent per week">
+        <input ng-model="property.amount" type="number" class="form-control" name="amount" placeholder="Rent per week" required min="10">
       </div>
     </div>
     <div class="form-group">
       <label for="description" class="col-sm-3 control-label">Description</label>
       <div class="col-sm-8">
-        <textarea ng-model="description" class="form-control" rows="5" name="description" placeholder="Property description">
+        <textarea ng-model="property.description" class="form-control" rows="5" name="description" placeholder="Property description" required>
         </textarea>
       </div>
     </div>
     <div class="form-group">
       <label for="address" class="col-sm-3 control-label">Date available</label>
       <div class="col-sm-5">
-        <input ng-model="dateAvailable" type="date" class="form-control" name="date_available">
+        <input ng-model="property.dateAvailable" type="date" class="form-control" name="date_available" required>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Beds</label>
       <div class="col-sm-3">
-        <select class="form-control" ng-model="selectedBed" ng-options="bed.value as bed.number for bed in beds"></select>
+        <select class="form-control" ng-model="property.bed" ng-options="bed.value as bed.number for bed in beds" required></select>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Bathrooms</label>
       <div class="col-sm-3">
-        <select class="form-control" ng-model="selectedBathroom" ng-options="bathroom.value as bathroom.number for bathroom in bathrooms"></select>
+        <select class="form-control" ng-model="property.bathroom" ng-options="bathroom.value as bathroom.number for bathroom in bathrooms" required></select>
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-3 control-label">Garage Spaces</label>
       <div class="col-sm-3">
-        <select class="form-control" ng-model="selectedGarageSpace" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces"></select>
+        <select class="form-control" ng-model="property.garageSpace" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces">
+          <option value selected>Select..</option>
+        </select>
       </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-10">
         <div class="checkbox">
           <label>
-            <input ng-model="smoking" type="checkbox"> Smoking allowed
+            <input ng-model="property.smoking" type="checkbox"> Smoking allowed
           </label>
         </div>
         <div class="checkbox">
           <label>
-            <input ng-model="pets" type="checkbox"> Pets allowed
+            <input ng-model="property.pets" type="checkbox"> Pets allowed
           </label>
         </div>
       </div>

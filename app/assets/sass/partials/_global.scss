@@ -9,3 +9,23 @@
 		}
 	}
 }
+
+form {
+  &.ng-submitted {
+    .ng-invalid.ng-dirty, .ng-invalid.ng-pristine {
+      border-color: #FA787E;
+    }
+
+    .ng-valid.ng-dirty, .ng-valid.ng-pristine {
+      border-color: #78FA89;
+    }
+  }
+
+  .ng-invalid.ng-dirty {
+    border-color: #FA787E;
+  }
+
+  .ng-valid.ng-dirty {
+    border-color: #78FA89;
+  }
+}
