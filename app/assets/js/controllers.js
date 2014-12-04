@@ -20,8 +20,8 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propert
     }        
   }]);
 
-realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'Page', 'Property', 'propertyImage',
-  function($scope, $routeParams, Page, Property, propertyImage) {
+realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', '$location', 'Page', 'Property', 'propertyImage',
+  function($scope, $routeParams, $location, Page, Property, propertyImage) {
     $scope.property = Property.get({propertyId: $routeParams.propertyId}, function(property) {
       $scope.mainImageUrl = propertyImage.jpg(property.photos[0].name);
       
@@ -32,6 +32,15 @@ realtyControllers.controller('PropertyDetailCtrl', ['$scope', '$routeParams', 'P
     $scope.setImage = function(image) {
       $scope.mainImageUrl = propertyImage.jpg(image);
     }
+
+    $scope.deleteProperty = function() {
+      $scope.property.$delete({propertyId: $routeParams.propertyId}, function(result) {
+        if (result.success) {
+          // redirect to home page
+          $location.path('/');
+        }
+      });
+    }    
   }
 ]);
 
@@ -94,7 +103,7 @@ realtyControllers.controller('PropertyEditCtrl', ['$scope', '$routeParams', '$lo
     });
     
     $scope.processForm = function() {
-      $scope.property.$save(function(result) {
+      $scope.property.$update({ propertyId:$routeParams.propertyId }, function(result) {
         if (result.success) {
           // redirect to home page
           $location.path('/');

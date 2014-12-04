@@ -21,6 +21,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Api'), function() {
 	Route::get('properties', ['as' => 'api.properties.index', 'uses' => 'PropertiesController@index']);
 	Route::get('properties/{propertyId}', ['as' => 'api.properties.show', 'uses' => 'PropertiesController@show']);
 	Route::post('properties', ['as' => 'api.properties.store', 'uses' => 'PropertiesController@store']);
+	Route::put('properties/{propertyId}', ['as' => 'api.properties.update', 'uses' => 'PropertiesController@update']);
 	Route::delete('properties/{propertyId}', ['as' => 'api.properties.store', 'uses' => 'PropertiesController@destroy']);
 });
 
