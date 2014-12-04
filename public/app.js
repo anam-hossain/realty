@@ -45,9 +45,13 @@ realtyApp.config(['$routeProvider',
 
 var realtyControllers = angular.module('realtyControllers', []);
 
-realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propertyImage',
-  function($scope, Property, propertyImage) {
+realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propertyImage', 'propertyData',
+  function($scope, Property, propertyImage, propertyData) {
     $scope.properties = Property.query();
+
+    $scope.beds = propertyData.beds();
+    $scope.bathrooms = propertyData.bathrooms();
+    $scope.garageSpaces = propertyData.garageSpaces();
 
     $scope.isCarSpaceAvailable = function(carSpace) {
       if (carSpace != 0) {
