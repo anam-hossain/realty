@@ -10,26 +10,27 @@
         <div class="form-group">
           <span for="exampleInputEmail1">Beds</span>
            <select class="form-control input-sm" ng-model="filter.beds" ng-options="bed.value as bed.number for bed in beds">
-             <option value selected>Select..</option>
+             <option value="" selected>Select..</option>
            </select>
         </div>
         <div class="form-group">
           <span for="exampleInputEmail1">Bathrooms</span>
           <select class="form-control input-sm" ng-model="filter.bathrooms" ng-options="bathroom.value as bathroom.number for bathroom in bathrooms">
-            <option value selected>Select..</option>
+            <option value="" selected>Select..</option>
           </select>
         </div>
         <div class="form-group">
           <span for="exampleInputEmail1">Garage spaces</span>
-          <select class="form-control input-sm" ng-model="filter.car_spaces" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces">
+          <select placeholder="Select.." class="form-control input-sm" ng-model="filter.car_spaces" ng-options="garageSpace.value as garageSpace.number for garageSpace in garageSpaces">
             <option value selected>Select..</option>
           </select>
         </div>
+        <button class="btn btn-default btn-sm" ng-click="clearFilters()">Clear</button>
       </form>
     </div>
   </div>
   <div class="col-sm-9">
-    <div class="well" ng-repeat="property in properties | filter:filter:strict">
+    <div class="well" ng-repeat="property in properties | filter:filter">
     <div class="row">
       <div class="col-sm-4">
           <a href="#/properties/{{property.id}}">

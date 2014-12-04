@@ -21,6 +21,10 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propert
     
     $scope.getPropertyImage = function(photo) {
       return propertyImage.jpg(photo.name);
+    }
+
+    $scope.clearFilters = function() {
+      $scope.filter = {};
     }        
   }]);
 
