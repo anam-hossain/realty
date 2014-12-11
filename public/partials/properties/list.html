@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-3">
     <div class="well">
-      <p>Refine Property By:</p>
+      <p class="h5">Refine Property By:</p>
       <form role="form">
         <div class="form-group">
           <span for="exampleInputEmail1">Address</span>
@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="col-sm-9">
-    <div class="well" ng-repeat="property in properties | filter:filter">
+    <div class="well" dir-paginate="property in properties | filter:filter | itemsPerPage: propertiesPerPage" total-items="totalProperties">
     <div class="row">
       <div class="col-sm-4">
           <a href="#/properties/{{property.id}}">
@@ -64,6 +64,7 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
   </div>
 </div>

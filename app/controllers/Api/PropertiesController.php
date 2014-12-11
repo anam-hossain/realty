@@ -22,7 +22,7 @@ class PropertiesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$properties = Property::with('photos')->orderBy('id', 'desc')->get();
+		$properties = Property::with('photos')->orderBy('id', 'desc')->paginate(10);
 
 		return Response::json($properties);
 	}

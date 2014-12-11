@@ -4,13 +4,34 @@
 
 var realtyControllers = angular.module('realtyControllers', []);
 
-realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propertyImage', 'propertyData',
-  function($scope, Property, propertyImage, propertyData) {
-    $scope.properties = Property.query();
-
+realtyControllers.controller('PropertyListCtrl', ['$scope', '$http', 'Property', 'propertyImage', 'propertyData',
+  function($scope, $http, Property, propertyImage, propertyData) {
+    // $scope.properties = Property.query();
+    // console.log($scope.properties);
     $scope.beds = propertyData.beds();
     $scope.bathrooms = propertyData.bathrooms();
     $scope.garageSpaces = propertyData.garageSpaces();
+
+    $scope.totalProperties = 0;
+    $scope.propertiesPerPage = 10; // this should match however many results your API puts on one page
+    getResultsPage(1);
+
+    $scope.pagination = {
+        current: 1
+    };
+
+    $scope.pageChanged = function(newPage) {
+        getResultsPage(newPage);
+    };
+
+    function getResultsPage(pageNumber) {
+      // this is just an example, in reality this stuff should be in a service
+      $http.get('/api/properties?page=' + pageNumber)
+          .then(function(result) {
+              $scope.properties = result.data.data;
+              $scope.totalProperties = result.data.total;
+          });
+    }
 
     $scope.isCarSpaceAvailable = function(carSpace) {
       if (carSpace != 0) {

@@ -35,6 +35,7 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

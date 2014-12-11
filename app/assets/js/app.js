@@ -4,10 +4,15 @@
 
 var realtyApp = angular.module('realtyApp', [
   'ngRoute',
+  'angularUtils.directives.dirPagination',
   'realtyControllers',
   'realtyFilters',
   'realtyServices'
 ]);
+
+realtyApp.config(function(paginationTemplateProvider) {
+    paginationTemplateProvider.setPath('/bower_components/angular-utils-pagination/dirPagination.tpl.html');
+});
 
 realtyApp.config(['$routeProvider',
   function($routeProvider) {
