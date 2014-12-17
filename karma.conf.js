@@ -19,6 +19,7 @@ module.exports = function(config) {
       'public/bower_components/angular-route/angular-route.js',
       'public/bower_components/angular-resource/angular-resource.js',
       'public/bower_components/angular-mocks/angular-mocks.js',
+      'public/bower_components/angular-utils-pagination/dirPagination.js',
       'app/assets/js/**/*.js',
       'public/test/unit/**/*.js'
     ],

@@ -61,17 +61,15 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propert
     // Paginate properties
     $scope.totalProperties = 0;
     $scope.propertiesPerPage = 10; // this should match however many results your API puts on one page
-    getResultsPage(1);
+    
 
     $scope.pagination = {
         current: 1
     };
 
-    $scope.pageChanged = function(newPage) {
-        getResultsPage(newPage);
-    };
 
-    function getResultsPage(pageNumber) {
+
+    $scope.getResultsPage = function getResultsPage(pageNumber) {
       // The following will generate : 
       // http://realty.dev/api/properties?page=1
       Property.get({page:pageNumber}, function(result) {
@@ -79,6 +77,12 @@ realtyControllers.controller('PropertyListCtrl', ['$scope', 'Property', 'propert
         $scope.totalProperties = result.total;
       });
     }
+    
+    $scope.getResultsPage(1);
+
+    $scope.pageChanged = function(newPage) {
+        $scope.getResultsPage(newPage);
+    };
 
     $scope.isCarSpaceAvailable = function(carSpace) {
       if (carSpace != 0) {
